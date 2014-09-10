@@ -47,3 +47,10 @@
 #       define CAUDIO_COMPILER_MINGW
 #   endif
 #endif
+
+
+#ifdef CAUDIO_PLATFORM_WIN
+#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>	//Basic windows includes
+#endif

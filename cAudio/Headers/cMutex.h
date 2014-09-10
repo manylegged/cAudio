@@ -7,11 +7,7 @@
 #include "cAudioDefines.h"
 
 #if CAUDIO_MAKE_THREAD_SAFE == 1
-	#ifdef CAUDIO_PLATFORM_WIN
-    #define NOMINMAX
-    #define WIN32_LEAN_AND_MEAN
-	#include <windows.h>	//Basic windows include
-	#else
+	#ifndef CAUDIO_PLATFORM_WIN
 	#include <pthread.h>	//Assumed linux system
 	#endif
 #endif
