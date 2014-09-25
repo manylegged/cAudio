@@ -9,8 +9,6 @@
 #include "cAudioString.h"
 
 #ifdef CAUDIO_PLATFORM_WIN
-#  define WIN32_LEAN_AND_MEAN
-#   define NOMINMAX
 #  include <direct.h>
 #  include <io.h>
 #endif

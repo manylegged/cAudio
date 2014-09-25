@@ -14,7 +14,7 @@
 #define CAUDIO_COMPILE_WITH_FILE_SOURCE 1
 
 //! This define controls whether the default file logger (html) is compiled into the library
-#define CAUDIO_COMPILE_WITH_FILE_LOG_RECEIVER 1
+#define CAUDIO_COMPILE_WITH_FILE_LOG_RECEIVER 0
 
 //! This define controls whether the default console logger is compiled into the library
 #define CAUDIO_COMPILE_WITH_CONSOLE_LOG_RECEIVER 0
@@ -29,7 +29,7 @@
 #define CAUDIO_MEMORY_USE_STD 1
 
 //! Tells cAudio to reroute memory allocations from stl containers into the defined memory provider for cAudio, otherwise the standard std::allocator is used.
-#define CAUDIO_REROUTE_STL_ALLOCATIONS 1
+#define CAUDIO_REROUTE_STL_ALLOCATIONS 0
 
 //! Activates the internal memory tracker, which can be used to detect and locate memory leaks.
 #define CAUDIO_USE_MEMORYTRACKER 0

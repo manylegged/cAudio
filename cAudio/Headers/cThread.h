@@ -9,9 +9,6 @@
 #include "IThread.h"
 
 #ifdef CAUDIO_PLATFORM_WIN
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>	//Basic windows includes
 #include <process.h>
 #else
 #include <pthread.h>	//Assumed linux system

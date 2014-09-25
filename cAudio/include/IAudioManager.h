@@ -18,6 +18,7 @@ namespace cAudio
     class IAudioBuffer;
 	class IAudioDecoderFactory;
 	class AudioCaptureBuffer;
+    class cAudioMutex;
 
 	//! Interface for the playback capabilities of cAudio.
     class IAudioManager
@@ -233,6 +234,8 @@ namespace cAudio
 
 		//! Returns the interface for the listener.
 		virtual IListener* getListener() = 0;
+
+        virtual cAudioMutex *getMutex() = 0;
 
 #if CAUDIO_EFX_ENABLED == 1
 		//! Returns the interface for audio effects.

@@ -12,9 +12,6 @@
 #include <string>
 
 #ifdef CAUDIO_PLATFORM_WIN
-#  define NOMINMAX
-#  define WIN32_LEAN_AND_MEAN
-#  include <windows.h>
 #  include <direct.h>
 #  include <io.h>
 #endif

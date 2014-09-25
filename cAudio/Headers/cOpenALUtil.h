@@ -23,8 +23,9 @@ namespace cAudio {
     //! Checks for OpenAL errors and reports them
     inline bool checkALErrorInternal(const char* file, const char *func, int line)
     {
-        const ALenum error = alGetError();
-        if (error != AL_NO_ERROR)
+        ALenum error = AL_NO_ERROR;
+        bool anyError = false;
+        while ((error = alGetError()) != AL_NO_ERROR)
         {
 			const char* errorString = alGetString(error);
 			if(error == AL_OUT_OF_MEMORY) {
@@ -35,9 +36,9 @@ namespace cAudio {
 			} else {
 				getLogger()->logError("Audio Source", "OpenAL Error: %s:%d:%s, %s.", file, line, func, errorString);
             }
-			return true;
+            anyError = true;
         }
-		return false;
+		return anyError;
     }
 
     //! Converts our audio format enum to OpenAL's

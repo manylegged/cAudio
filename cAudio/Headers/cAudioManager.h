@@ -85,6 +85,8 @@ namespace cAudio
 		virtual IAudioEffects* getEffects();
 #endif
 
+        virtual cAudioMutex *getMutex() { return &Mutex; }
+
 	protected:
 		virtual void run();
 
