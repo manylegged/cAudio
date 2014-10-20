@@ -78,12 +78,17 @@ namespace cAudio
 #endif
     }
 
-    static wchar_t* charToWChar(const char* text)
+    static const wchar_t* charToWChar(const char* text)
     {
-	size_t size = strlen(text) + 1;
-	wchar_t* wa = new wchar_t[size];
-	mbstowcs(wa, text, size);
-	return wa;
+        size_t size = strlen(text) + 1;
+        wchar_t* wa = new wchar_t[size];
+        mbstowcs(wa, text, size);
+        return wa;
+    }
+
+    static const wchar_t* charToWChar(const wchar_t* text)
+    {
+        return text;
     }
     
     static const char* toUTF8(const cAudioString& str)
@@ -109,9 +114,9 @@ namespace cAudio
 
         memset((void*)buffer, 0, sizeof(wchar_t) * (buff_size + 1));
         MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str), buffer, buff_size);
-	char* convert = new char[buff_size+1];
-	wcstombs(convert, buffer, sizeof(wchar_t) * (buff_size + 1));
-        cAudioString s(convert);
+        char* convert = new char[buff_size + 1];
+        wcstombs(convert, buffer, sizeof(wchar_t) * (buff_size + 1));
+        cAudioString s(charToWChar(convert));
         delete[] buffer;
         return s;
     }
