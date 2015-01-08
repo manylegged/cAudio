@@ -23,7 +23,7 @@ namespace cAudio
 {
 	cAudioManager::~cAudioManager() 
 	{ 			
-		shutDown();
+        cAudioManager::shutDown();
 	}
 
     bool cAudioManager::initialize(const char* deviceName, int outputFrequency, int eaxEffectSlots)

@@ -108,7 +108,8 @@ namespace cAudio
 			getLogger()->logWarning("AudioManager", "EFX is not supported, EFX disabled.");
 		}
 #endif
-		getLogger()->logInfo("AudioManager", "Supported Extensions: %s", alGetString(AL_EXTENSIONS));
+		getLogger()->logWarning("AudioManager", "Supported Extensions: %s", alGetString(AL_EXTENSIONS));
+        Initialized = true;
 
 		return true;
 	}

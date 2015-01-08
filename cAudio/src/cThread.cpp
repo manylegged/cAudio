@@ -13,8 +13,6 @@ namespace cAudio
 
 	cAudioThread::~cAudioThread()
 	{
-		if(IsInit)
-			shutdown();
 	}
 
 	bool cAudioThread::start()

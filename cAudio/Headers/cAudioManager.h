@@ -36,7 +36,7 @@ namespace cAudio
 		virtual ~cAudioManager();
 
 		virtual bool initialize(const char* deviceName = 0x0, int outputFrequency = -1, int eaxEffectSlots = 4);      
-		virtual void shutDown();     
+		virtual void shutDown();
 		virtual void update();
 		virtual IAudioSource* getSoundByName(const char* name);       
 		virtual void releaseAllSources();

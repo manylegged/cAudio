@@ -22,7 +22,7 @@ namespace cAudio
 	}
 	cAudioCapture::~cAudioCapture()
 	{
-		shutdown();
+        cAudioCapture::shutdown();
 	}
 
 	void cAudioCapture::run()

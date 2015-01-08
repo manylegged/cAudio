@@ -13,6 +13,9 @@
 #endif
 
 #if DEBUG
+#ifndef __func__
+#define __func__ __FUNCTION__
+#endif
 #define checkALError() checkALErrorInternal(__FILE__, __func__, __LINE__)
 #else
 #define checkALError() (false)
