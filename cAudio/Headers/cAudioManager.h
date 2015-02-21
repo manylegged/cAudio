@@ -111,6 +111,7 @@ namespace cAudio
 		typedef cAudioMap<cAudioString, IAudioSource*>::Type::iterator audioIndexIterator;
 		//! Holds all managed audio sources
 		cAudioVector<IAudioSource*>::Type audioSources;
+        cAudioVector<IAudioSource*>::Type updateSources;
 		//! Holds audio sources which gets deleted from the audioManager
 		cAudioVector<IAudioSource*>::Type managedAudioSources;
 		//! Holds audio sources which gets deleted from the audioManager

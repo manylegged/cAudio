@@ -44,60 +44,13 @@ namespace cAudio
 
     
 #if defined(CAUDIO_PLATFORM_WIN)
-    static const TCHAR* toWINSTR(const char* str)
-    {
-#if (defined(UNICODE) || defined(_UNICODE))
-        static int id = 0;
-        static wchar_t buffer[8][1024];
-        id = ++id & 0x7;
-        
-        int slen = strlen(str);
-        int buff_size = MultiByteToWideChar(CP_UTF8, 0, str, (int)(slen < 1023 ? slen : 1023), buffer[id], 1023);
-        buffer[id][buff_size] = 0;
-        buffer[id][1023] = 0;
-        return buffer[id];
-#else
-		return str;
-#endif
-    }
-    
-    static const TCHAR* toWINSTR(const wchar_t* str)
-    {
-#if (defined(UNICODE) || defined(_UNICODE))
-		return str;
-#else
-        static int id = 0;
-        static char buffer[8][1024];
-        id = ++id & 0x7;
-    
-        int slen = wcslen(str);
-        int buff_size = WideCharToMultiByte(CP_UTF8, 0, str, (int)(slen < 1023 ? slen : 1023), buffer[id], 1023, 0, false);
-        buffer[id][buff_size] = 0;
-        buffer[id][1023] = 0;
-        return buffer[id];
-#endif
-    }
-
-    static const wchar_t* charToWChar(const char* text)
-    {
-        size_t size = strlen(text) + 1;
-        wchar_t* wa = new wchar_t[size];
-        mbstowcs(wa, text, size);
-        return wa;
-    }
-
-    static const wchar_t* charToWChar(const wchar_t* text)
-    {
-        return text;
-    }
-    
     static const char* toUTF8(const cAudioString& str)
     {
         static int id = 0;
         static char buffer[8][1024];
         id = ++id & 0x7;
-        
-	int buff_size = WideCharToMultiByte(CP_UTF8, 0, charToWChar(str.c_str()), (int)(str.size() < 1023 ? str.size() : 1023), buffer[id], 1023, 0, false);
+
+        int buff_size = WideCharToMultiByte(CP_UTF8, 0, str.c_str(), (int)(str.size() < 1023 ? str.size() : 1023), buffer[id], 1023, 0, false);
         buffer[id][buff_size] = 0;
         buffer[id][1023] = 0;
         return buffer[id];
@@ -105,28 +58,14 @@ namespace cAudio
 
     static cAudioString fromUTF8(const char* str)
     {
-        wchar_t* buffer = 0;
-        int buff_size = MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str), 0, 0);
-        if (buff_size == 0)
-            return cAudioString();
-
-        buffer = new wchar_t[buff_size + 1];
-
-        memset((void*)buffer, 0, sizeof(wchar_t) * (buff_size + 1));
-        MultiByteToWideChar(CP_UTF8, 0, str, (int)strlen(str), buffer, buff_size);
-        char* convert = new char[buff_size + 1];
-        wcstombs(convert, buffer, sizeof(wchar_t) * (buff_size + 1));
-        cAudioString s(charToWChar(convert));
-        delete[] buffer;
+        int str_len = (int)strlen(str);
+        int buf_size = MultiByteToWideChar(CP_UTF8, 0, str, str_len, 0, 0);
+        cAudioString s(buf_size, L'\0');
+        MultiByteToWideChar(CP_UTF8, 0, str, str_len, &s[0], buf_size);
         return s;
     }
     
 #else
-    inline const char* toWINSTR(const char* str)
-    {
-		return str;
-    }
-
     inline const char* toUTF8(const cAudioString& str)
     {
         return str.c_str();

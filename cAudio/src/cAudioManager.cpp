@@ -61,6 +61,10 @@ namespace cAudio
 			} 
 
 			cAudioMutexBasicLock lock(Mutex);
+            
+            unRegisterAllAudioDecoders();
+			unRegisterAllDataSources();
+			unRegisterAllEventHandlers();
 
 			releaseAllSources();
 			
@@ -79,20 +83,35 @@ namespace cAudio
 
 	void cAudioManager::update()
 	{
-		cAudioMutexBasicLock lock(Mutex);
-		size_t count = audioSources.size();
-		for(size_t i=0; i<count; i++)
-		{
-			IAudioSource* source = audioSources[i];
-			if (source->isValid())
-			{
-				source->update();
-			}
-		}
+        updateSources.clear();
 
+        {
+            cAudioMutexBasicLock lock(Mutex);
+            size_t count = audioSources.size();
+            for(size_t i=0; i<count; i++)
+            {
+                IAudioSource* source = audioSources[i];
+                if (source->isValid())
+                {
+                    source->grab();
+                    updateSources.push_back(source);
+                }
+            }
+        }
+
+        // not holding the mutex because this might take a while!
+        for (int i=0; i != updateSources.size(); i++)
+        {
+            IAudioSource *src = updateSources[i];
+            src->update();
+            src->drop();
+        }
+
+        cAudioMutexBasicLock lock(Mutex);
+        
 		if (!managedAudioSources.empty())
 		{
-			count = managedAudioSources.size();
+			size_t count = managedAudioSources.size();
 			for(size_t i=0; i<count; i++)
 			{
 				IAudioSource* source = managedAudioSources[i];

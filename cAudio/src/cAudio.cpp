@@ -91,9 +91,6 @@ namespace cAudio
 			}
 #endif
 
-			manager->unRegisterAllAudioDecoders();
-			manager->unRegisterAllDataSources();
-			manager->unRegisterAllEventHandlers();
 			manager->shutDown();
 
 			CAUDIO_DELETE manager;

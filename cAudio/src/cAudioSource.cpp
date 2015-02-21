@@ -781,7 +781,10 @@ namespace cAudio
         while( totalread < CAUDIO_SOURCE_BUFFER_SIZE )
         {
             char tempbuffer2[CAUDIO_SOURCE_BUFFER_SIZE];
+            Mutex.unlock();    // this can take a long time
             int actualread = Decoder->readAudioData(tempbuffer2, CAUDIO_SOURCE_BUFFER_SIZE-totalread);
+            Mutex.lock();
+            
             if(actualread > 0)
             {
                 memcpy(tempbuffer+totalread,tempbuffer2,actualread);
