@@ -20,7 +20,7 @@ namespace cAudio
 	class IAudioSource;
     class IAudioBuffer;
 
-	class cAudioManager : public IAudioManager, public cMemoryOverride, public IThreadWorker
+	class cAudioManager final : public IAudioManager, public cMemoryOverride, public IThreadWorker
 	{
 	public:
 		enum Events{

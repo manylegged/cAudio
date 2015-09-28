@@ -12,7 +12,7 @@
 
 namespace cAudio
 {
-	class cLogger : public ILogger
+	class cLogger final : public ILogger
     {
     public:
 		cLogger();

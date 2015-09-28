@@ -3,7 +3,7 @@
 
 namespace cAudio
 {
-    class cAudioBuffer : public IAudioBuffer
+    class cAudioBuffer final : public IAudioBuffer
     {
         ALuint Buffer;
         bool   Valid;
@@ -85,7 +85,7 @@ namespace cAudio
     };
 
 
-    class cAudioStaticSource : public cAudioSourceBase
+    class cAudioStaticSource final : public cAudioSourceBase
     {
         IAudioBuffer* Buffer;
         

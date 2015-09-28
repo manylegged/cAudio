@@ -15,7 +15,7 @@
 namespace cAudio
 {
 
-class cFileSource : public IDataSource, public cMemoryOverride
+class cFileSource final : public IDataSource, public cMemoryOverride
 {
     public:
         cFileSource(const char* filename);

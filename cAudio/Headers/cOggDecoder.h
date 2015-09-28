@@ -17,7 +17,7 @@
 namespace cAudio
 {
 
-    class cOggDecoder : public IAudioDecoder, public cMemoryOverride
+    class cOggDecoder final : public IAudioDecoder, public cMemoryOverride
     {
         public:
 

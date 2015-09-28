@@ -113,7 +113,7 @@ namespace cAudio
 		cAudioVector<ISourceEventHandler*>::Type eventHandlerList;
     };
 
-    class cAudioSource : public cAudioSourceBase {
+    class cAudioSource final : public cAudioSourceBase {
     public:
 #if CAUDIO_EFX_ENABLED == 1
 		cAudioSource(IAudioDecoder* decoder, IAudioDeviceContext* context, cEFXFunctions* oALFunctions);

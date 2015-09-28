@@ -16,7 +16,7 @@
 
 namespace cAudio
 {
-	class cAudioThread : public IThread
+	class cAudioThread final : public IThread
 	{
 	public:
 		cAudioThread(IThreadWorker* pWorker);
